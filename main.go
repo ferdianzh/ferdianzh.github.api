@@ -1,13 +1,18 @@
 package main
 
 import (
-	"github.com/ferdianzh/ferdianzh.github.api/controllers/works"
+	"github.com/ferdianzh/ferdianzh.github.api/controllers"
+	"github.com/ferdianzh/ferdianzh.github.api/models"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	router := gin.Default()
-	router.GET("/works", works.GetAll)
+	r := gin.Default()
+	models.InitDB()
+	
+	r.GET("/works", controllers.FindWorks)
 
-	router.Run()
+	r.GET("/mhs", controllers.FindMahasiswa)
+
+	r.Run("localhost:8080")
 }
