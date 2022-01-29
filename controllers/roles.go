@@ -7,11 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type RolesValidation struct {
-	Name        string `json:"name" binding:"required"`
-	Description string `json:"description"`
-}
-
 // GET /roles
 // Get all roles
 func FindRoles(c *gin.Context) {
@@ -21,10 +16,14 @@ func FindRoles(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": roles})
 }
 
+type CreateRoleInput struct {
+	Name        string `json:"name" binding:"required"`
+	Description string `json:"description"`
+}
 // POST /roles
 // Create new roles
 func CreateRoles(c *gin.Context) {
-	var input RolesValidation
+	var input CreateRoleInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -49,4 +48,42 @@ func FindRole(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": role})
+}
+
+type UpdateRoleInput struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+}
+// PATCH /roles/:id
+// Update a role
+func UpdateRole(c *gin.Context) {
+	var role models.Role
+	if err := models.DB.Where("id = ?", c.Param("id")).First(&role).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "record not found"})
+		return
+	}
+
+	var input UpdateRoleInput
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	models.DB.Model(&role).Updates(input)
+	
+	c.JSON(http.StatusOK, gin.H{"data": role})
+}
+
+// DELETE /roles/:id
+// Delete a role
+func DeleteRole(c *gin.Context) {
+	var role models.Role
+	if err := models.DB.Where("id = ?", c.Param("id")).First(&role).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "record not found"})
+		return
+	}
+
+	models.DB.Delete(&role)
+
+	c.JSON(http.StatusOK, gin.H{"data": true})
 }
