@@ -11,8 +11,12 @@ func main() {
 	models.InitDB()
 	
 	// still need security with jwt
+	r.GET("/roles", controllers.FindRoles)
+	r.POST("/roles", controllers.CreateRoles)
+	r.GET("/roles/:id", controllers.FindRole)
+
 	r.GET("/works", controllers.FindWorks)
-	r.GET("/mhs", controllers.FindMahasiswa)
+	r.POST("/works", controllers.CreateWorks)
 
 	r.Static("/img", "./storages/images")
 

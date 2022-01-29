@@ -1,9 +1,9 @@
 package models
 
-type Works struct {
+type Work struct {
 	ID          uint   `json:"id" gorm:"primary_key"`
+	IDRole      string `json:"id_role"`
 	Name        string `json:"name"`
-	Role        string `json:"role"`
 	Tech        string `json:"tech"`
 	Description string `json:"description"`
 }
