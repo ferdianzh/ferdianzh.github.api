@@ -22,7 +22,7 @@ type CreateRoleInput struct {
 }
 // POST /roles
 // Create new roles
-func CreateRoles(c *gin.Context) {
+func CreateRole(c *gin.Context) {
 	var input CreateRoleInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
