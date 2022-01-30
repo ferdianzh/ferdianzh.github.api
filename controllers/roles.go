@@ -74,7 +74,7 @@ func UpdateRole(c *gin.Context) {
 		Description	: input.Description,
 	})
 	
-	c.JSON(http.StatusOK, gin.H{"data": input, "role": role})
+	c.JSON(http.StatusOK, gin.H{"data": role})
 }
 
 // DELETE /roles/:id
