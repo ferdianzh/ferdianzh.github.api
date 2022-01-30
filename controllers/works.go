@@ -24,7 +24,7 @@ type CreateWorkInput struct {
 }
 // POST /works
 // Create new works
-func CreateWorks(c *gin.Context) {
+func CreateWork(c *gin.Context) {
 	var input CreateWorkInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

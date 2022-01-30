@@ -12,13 +12,16 @@ func main() {
 	
 	// still need security with jwt
 	r.GET("/roles", controllers.FindRoles)
-	r.POST("/roles", controllers.CreateRoles)
+	r.POST("/roles", controllers.CreateRole)
 	r.GET("/roles/:id", controllers.FindRole)
 	r.PATCH("/roles/:id", controllers.UpdateRole)
 	r.DELETE("/roles/:id", controllers.DeleteRole)
 
 	r.GET("/works", controllers.FindWorks)
-	r.POST("/works", controllers.CreateWorks)
+	r.POST("/works", controllers.CreateWork)
+	r.GET("/works/:id", controllers.FindWork)
+	r.PATCH("/works/:id", controllers.UpdateWork)
+	r.DELETE("/works/:id", controllers.DeleteWork)
 
 	r.Static("/img", "./storages/images")
 
