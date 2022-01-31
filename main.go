@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/ferdianzh/ferdianzh.github.api/controllers"
 	"github.com/ferdianzh/ferdianzh.github.api/models"
+	"github.com/ferdianzh/ferdianzh.github.api/services"
 	"github.com/gin-gonic/gin"
 )
 
@@ -23,7 +24,8 @@ func main() {
 	r.PATCH("/works/:id", controllers.UpdateWork)
 	r.DELETE("/works/:id", controllers.DeleteWork)
 
-	r.Static("/img", "./storages/images")
+	r.Static("/images", "./storages/images")
+	r.POST("/upload/:folder", services.UploadImage)
 
 	r.Run("localhost:8080")
 }
