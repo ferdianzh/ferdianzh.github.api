@@ -6,4 +6,5 @@ type Work struct {
 	Name        string `json:"name"`
 	Tech        string `json:"tech"`
 	Description string `json:"description"`
+	Image       string `json:"image"`
 }

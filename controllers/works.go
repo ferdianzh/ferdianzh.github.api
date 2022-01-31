@@ -21,6 +21,7 @@ type CreateWorkInput struct {
 	Name 			string `json:"name" binding:"required"`
 	Tech        string `json:"tech" binding:"required"`
 	Description string `json:"description"`
+	Image			string `json:"image"`
 }
 // POST /works
 // Create new works
@@ -36,6 +37,7 @@ func CreateWork(c *gin.Context) {
 		Name			: input.Name,
 		Tech			: input.Tech,
 		Description	: input.Description,
+		Image			: input.Image,
 	}
 	models.DB.Create(&work)
 
@@ -59,6 +61,7 @@ type UpdateWorkInput struct {
 	Name 			string `json:"name"`
 	Tech        string `json:"tech"`
 	Description string `json:"description"`
+	Image			string `json:"image"`
 }
 // PATCH /works/:id
 // Update a work
@@ -80,6 +83,7 @@ func UpdateWork(c *gin.Context) {
 		Name			: input.Name,
 		Tech			: input.Tech,
 		Description	: input.Description,
+		Image			: input.Image,
 	})
 
 	c.JSON(http.StatusOK, gin.H{"data": work})
